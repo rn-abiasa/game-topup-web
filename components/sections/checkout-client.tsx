@@ -1,36 +1,51 @@
 "use client";
 
 import { useState } from "react";
-import { Product, GameItem, gameItems } from "@/lib/data";
 import { InputCard } from "@/components/ui/input-card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MessageCircle, ShieldCheck, Zap } from "lucide-react";
+import { createOrder } from "@/app/actions/order";
+import { useRouter } from "next/navigation";
 
 interface CheckoutClientProps {
-  game: Product;
+  game: any;
+  items: any[];
 }
 
-export default function CheckoutClient({ game }: CheckoutClientProps) {
+export default function CheckoutClient({ game, items }: CheckoutClientProps) {
+  const router = useRouter();
   const [userId, setUserId] = useState("");
   const [serverId, setServerId] = useState("");
-  const [selectedItem, setSelectedItem] = useState<GameItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<any | null>(null);
   const [contact, setContact] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (!userId || !selectedItem || !contact) {
       alert("Mohon lengkapi semua data transaksi!");
       return;
     }
 
-    const message = `Order: ${game.name} - ${selectedItem.name}
-ID: ${userId}${serverId ? ` (${serverId})` : ""}
-Contact: ${contact}`;
-    
-    const whatsappUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
+    setLoading(true);
+    try {
+      const orderCode = await createOrder({
+        game_id: game.id,
+        item_id: selectedItem.id,
+        game_name: game.name,
+        item_name: selectedItem.name,
+        price: selectedItem.price,
+        user_id_game: userId,
+        server_id: serverId || undefined,
+        contact_wa: contact,
+      });
+      router.push(`/order/${orderCode}`);
+    } catch (err) {
+      alert("Terjadi kesalahan, coba lagi.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -40,7 +55,7 @@ Contact: ${contact}`;
         {/* Left Column: Game Info */}
         <div className="lg:col-span-1 space-y-6">
           <div className="bg-card border border-border/40 rounded-xl p-6 shadow-sm flex flex-col items-center lg:items-start text-center lg:text-left">
-            <img src={game.image} alt={game.name} className="w-24 h-24 rounded-2xl shadow-lg border-4 border-card -mt-16 mb-4 object-cover" />
+            <img src={game.image_url} alt={game.name} className="w-24 h-24 rounded-2xl shadow-lg border-4 border-card -mt-16 mb-4 object-cover" />
             <h1 className="text-2xl font-bold text-foreground">{game.name}</h1>
             <p className="text-sm font-medium text-primary mb-6">{game.publisher}</p>
             
@@ -102,7 +117,7 @@ Contact: ${contact}`;
 
               <InputCard number={2} title="Pilih Nominal">
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-                  {gameItems.map((item) => (
+                  {items.map((item) => (
                     <div 
                       key={item.id}
                       onClick={() => setSelectedItem(item)}
@@ -118,6 +133,9 @@ Contact: ${contact}`;
                       </p>
                     </div>
                   ))}
+                  {items.length === 0 && (
+                    <p className="col-span-full text-sm text-muted-foreground py-4 text-center">Belum ada item tersedia.</p>
+                  )}
                 </div>
               </InputCard>
 
@@ -131,7 +149,7 @@ Contact: ${contact}`;
                       value={contact}
                       onChange={(e) => setContact(e.target.value)}
                     />
-                    <p className="text-xs text-muted-foreground">Bukti pembayaran dan status pesanan akan dikirimkan ke nomor ini.</p>
+                    <p className="text-xs text-muted-foreground">Kode pesanan dan instruksi pembayaran akan dikirim ke nomor ini.</p>
                   </div>
                   <div className="pt-4 border-t border-border/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
@@ -140,8 +158,13 @@ Contact: ${contact}`;
                         Rp {selectedItem ? selectedItem.price.toLocaleString('id-ID') : "0"}
                       </p>
                     </div>
-                    <Button onClick={handleCheckout} size="lg" className="w-full md:w-auto font-bold text-base px-8 py-6">
-                      Beli Sekarang
+                    <Button 
+                      onClick={handleCheckout} 
+                      size="lg" 
+                      disabled={loading}
+                      className="w-full md:w-auto font-bold text-base px-8 py-6"
+                    >
+                      {loading ? "Memproses..." : "Pesan Sekarang"}
                     </Button>
                   </div>
                 </div>
@@ -156,29 +179,15 @@ Contact: ${contact}`;
                 </p>
                 
                 <h3 className="text-lg font-semibold mt-8 mb-4">Catatan Transaksi</h3>
-                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-2">
-                  <li>Pastikan User ID yang dimasukkan sudah benar.</li>
-                  <li>Kesalahan input User ID bukan tanggung jawab kami.</li>
-                  <li>Proses memakan waktu 1-5 menit setelah pembayaran dikonfirmasi.</li>
-                  <li>Simpan bukti pembayaran jika terjadi kendala.</li>
-                </ul>
-
-                <h3 className="text-lg font-semibold mt-8 mb-4">Ulasan Pelanggan</h3>
-                <div className="space-y-4">
-                  <div className="border-b border-border/40 pb-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <p className="font-medium text-sm">Budi Santoso</p>
-                      <div className="flex text-yellow-500 text-xs">★★★★★</div>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Proses sangat cepat mantap!</p>
-                  </div>
-                  <div className="border-b border-border/40 pb-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <p className="font-medium text-sm">Rina Wati</p>
-                      <div className="flex text-yellow-500 text-xs">★★★★★</div>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Admin ramah dan fast respon. Recomended banget.</p>
-                  </div>
+                <div className="text-sm text-muted-foreground space-y-2 whitespace-pre-wrap">
+                  {game.notes || (
+                    <ul className="list-disc list-inside space-y-1">
+                      <li>Pastikan User ID yang dimasukkan sudah benar.</li>
+                      <li>Kesalahan input User ID bukan tanggung jawab kami.</li>
+                      <li>Proses memakan waktu 1-5 menit setelah pembayaran dikonfirmasi.</li>
+                      <li>Simpan bukti pembayaran jika terjadi kendala.</li>
+                    </ul>
+                  )}
                 </div>
               </div>
             </TabsContent>

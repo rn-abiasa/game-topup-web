@@ -1,17 +1,16 @@
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
-  id: string;
   name: string;
   publisher: string;
   image: string;
+  popular?: boolean;
   className?: string;
 }
 
-export function ProductCard({ id, name, publisher, image, className }: ProductCardProps) {
+export function ProductCard({ name, publisher, image, popular, className }: ProductCardProps) {
   return (
-    <Link href={`/game/${id}`} className={cn("block group", className)}>
+    <div className={cn("block group cursor-pointer", className)}>
       <div 
         className="relative aspect-[3/4] rounded-xl overflow-hidden bg-secondary bg-cover bg-center transition-transform duration-300 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-primary/20"
         style={{ backgroundImage: `url(${image})` }}
@@ -21,6 +20,6 @@ export function ProductCard({ id, name, publisher, image, className }: ProductCa
           <p className="text-primary font-medium text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">{publisher}</p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

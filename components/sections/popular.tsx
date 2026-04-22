@@ -1,43 +1,53 @@
 import Link from "next/link";
-import { games } from "@/lib/data";
+import { getGames } from "@/app/actions/game";
+import { Flame } from "lucide-react";
 
-function Popular() {
-  // Take first 4 games as popular
-  const populars = games.slice(0, 4);
+export default async function PopularGames() {
+  const allGames = await getGames();
+  const popularGames = allGames.slice(0, 6);
 
   return (
-    <section className="bg-secondary/30 py-8 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-6">
-          <h2 className="text-xl md:text-2xl font-bold text-foreground flex items-center gap-2">
-            🔥 POPULAR SEKARANG
+    <section className="py-5 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center gap-3 mb-8 md:mb-12">
+        <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-500">
+          <Flame className="w-6 h-6 md:w-7 md:h-7" />
+        </div>
+        <div>
+          <h2 className="text-lg md:text-xl font-bold tracking-tight text-foreground">
+            Populer Saat Ini
           </h2>
-          <p className="text-sm md:text-base font-normal text-muted-foreground mt-1">
-            Berikut adalah beberapa produk yang paling popular saat ini.
+          <p className="text-sm md:text-base text-muted-foreground mt-1">
+            Game yang paling banyak di-topup minggu ini.
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {populars.map((popular) => (
-            <Link href={`/game/${popular.id}`} key={popular.id}>
-              <div className="bg-card hover:bg-secondary/50 border border-border/50 rounded-xl flex items-center gap-3 px-4 py-3 transition-colors duration-200">
-                <img 
-                  src={popular.image} 
-                  alt={popular.name}
-                  className="h-12 w-12 rounded-lg object-cover" 
-                />
-                <div className="overflow-hidden">
-                  <p className="text-sm font-semibold text-foreground truncate">{popular.name}</p>
-                  <p className="text-xs font-normal text-muted-foreground truncate">
-                    {popular.publisher}
-                  </p>
-                </div>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        {popularGames.map((game: any) => (
+          <Link href={`/game/${game.slug}`} key={game.id}>
+            <div className="flex items-center gap-4 p-4 rounded-xl border border-border/40 bg-card hover:bg-secondary/50 hover:border-primary/40 transition-all duration-200 group">
+              <img
+                src={game.image_url}
+                alt={game.name}
+                className="w-14 h-14 rounded-lg object-cover flex-shrink-0"
+              />
+              <div className="overflow-hidden">
+                <p className="font-semibold text-sm text-foreground truncate group-hover:text-primary transition-colors">
+                  {game.name}
+                </p>
+                <p className="text-xs text-muted-foreground truncate mt-0.5">
+                  {game.publisher}
+                </p>
               </div>
-            </Link>
-          ))}
-        </div>
+            </div>
+          </Link>
+        ))}
+        {popularGames.length === 0 && (
+          <p className="text-muted-foreground col-span-full text-center py-8">
+            Belum ada game populer.
+          </p>
+        )}
       </div>
     </section>
   );
 }
-
-export default Popular;
