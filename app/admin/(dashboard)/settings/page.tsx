@@ -61,7 +61,7 @@ export default function AdminSettingsPage() {
         </div>
 
         {success && (
-          <div className="mb-4 p-3 bg-green-500/10 border border-green-500/30 rounded-md text-green-500 text-sm flex items-center gap-2">
+          <div className="mb-4 p-3 bg-success/10 border border-success/30 rounded-md text-success text-sm flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4" />
             Password berhasil diubah!
           </div>

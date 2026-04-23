@@ -10,7 +10,7 @@ export default async function PopularGames() {
   return (
     <section className="py-5 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex items-center gap-3 mb-8 md:mb-12">
-        <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-500">
+        <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-warning/20 flex items-center justify-center text-warning">
           <Flame className="w-6 h-6 md:w-7 md:h-7" />
         </div>
         <div>

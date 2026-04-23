@@ -11,9 +11,9 @@ interface PageProps {
 }
 
 const statusConfig: Record<string, { label: string; color: string; icon: any }> = {
-  pending:    { label: "Menunggu Pembayaran", color: "text-yellow-500",  icon: Clock },
-  processing: { label: "Sedang Diproses",     color: "text-blue-500",   icon: Clock },
-  done:       { label: "Selesai",             color: "text-green-500",  icon: CheckCircle2 },
+  pending:    { label: "Menunggu Pembayaran", color: "text-warning",  icon: Clock },
+  processing: { label: "Sedang Diproses",     color: "text-info",     icon: Clock },
+  done:       { label: "Selesai",             color: "text-success",  icon: CheckCircle2 },
   failed:     { label: "Gagal",               color: "text-destructive", icon: Clock },
 };
 

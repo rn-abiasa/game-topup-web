@@ -7,9 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const statusColors: Record<string, string> = {
-  pending:    "bg-yellow-500/20 text-yellow-500 border-yellow-500/30",
-  processing: "bg-blue-500/20 text-blue-500 border-blue-500/30",
-  done:       "bg-green-500/20 text-green-500 border-green-500/30",
+  pending:    "bg-warning/20 text-warning border-warning/30",
+  processing: "bg-info/20 text-info border-info/30",
+  done:       "bg-success/20 text-success border-success/30",
   failed:     "bg-destructive/20 text-destructive border-destructive/30",
 };
 

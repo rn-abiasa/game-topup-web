@@ -11,9 +11,9 @@ interface PageProps {
 }
 
 const statusConfig: Record<string, { label: string; color: string; bgColor: string; icon: any }> = {
-  pending:    { label: "Menunggu Pembayaran", color: "text-yellow-500",  bgColor: "bg-yellow-500/10 border-yellow-500/30", icon: Clock },
-  processing: { label: "Sedang Diproses",     color: "text-blue-500",   bgColor: "bg-blue-500/10 border-blue-500/30",    icon: Loader2 },
-  done:       { label: "Selesai ✓",           color: "text-green-500",  bgColor: "bg-green-500/10 border-green-500/30",  icon: CheckCircle2 },
+  pending:    { label: "Menunggu Pembayaran", color: "text-warning",  bgColor: "bg-warning/10 border-warning/30", icon: Clock },
+  processing: { label: "Sedang Diproses",     color: "text-info",     bgColor: "bg-info/10 border-info/30",    icon: Loader2 },
+  done:       { label: "Selesai ✓",           color: "text-success",  bgColor: "bg-success/10 border-success/30",  icon: CheckCircle2 },
   failed:     { label: "Gagal",               color: "text-destructive", bgColor: "bg-destructive/10 border-destructive/30", icon: XCircle },
 };
 

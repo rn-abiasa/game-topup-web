@@ -107,7 +107,7 @@ export default function ImportItemsForm({ games }: { games: Game[] }) {
     return (
       <div className="bg-card border border-border/40 rounded-xl p-12 text-center space-y-4 shadow-sm">
         <div className="flex justify-center">
-          <CheckCircle2 className="w-16 h-16 text-green-500 animate-bounce" />
+          <CheckCircle2 className="w-16 h-16 text-success animate-bounce" />
         </div>
         <h2 className="text-2xl font-bold">Import Berhasil!</h2>
         <p className="text-muted-foreground">Berhasil mengimport {items.filter(i => i.status === "valid").length} item.</p>
@@ -174,7 +174,7 @@ export default function ImportItemsForm({ games }: { games: Game[] }) {
           <div className="p-4 border-b border-border/40 bg-secondary/30 flex justify-between items-center">
             <h3 className="font-semibold text-sm">Preview Data ({items.length} baris)</h3>
             <div className="flex gap-2">
-              <span className="text-xs px-2 py-1 bg-green-500/10 text-green-600 rounded-full border border-green-500/20">
+              <span className="text-xs px-2 py-1 bg-success/10 text-success rounded-full border border-success/20">
                 {items.filter(i => i.status === "valid").length} Valid
               </span>
               {items.filter(i => i.status === "invalid").length > 0 && (
@@ -200,7 +200,7 @@ export default function ImportItemsForm({ games }: { games: Game[] }) {
                     <TableCell>Rp {item.price.toLocaleString("id-ID")}</TableCell>
                     <TableCell>
                       {item.status === "valid" ? (
-                        <span className="text-green-600 flex items-center gap-1 text-xs font-medium">
+                        <span className="text-success flex items-center gap-1 text-xs font-medium">
                           <CheckCircle2 className="w-3 h-3" /> Valid
                         </span>
                       ) : (

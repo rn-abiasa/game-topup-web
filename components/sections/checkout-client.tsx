@@ -123,7 +123,7 @@ export default function CheckoutClient({ game, items }: CheckoutClientProps) {
                       onClick={() => setSelectedItem(item)}
                       className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
                         selectedItem?.id === item.id 
-                          ? "border-primary bg-primary/10 shadow-[0_0_15px_rgba(var(--primary),0.2)]" 
+                          ? "border-primary bg-primary/10 shadow-lg shadow-primary/20" 
                           : "border-border/50 bg-secondary/20 hover:bg-secondary/50 hover:border-primary/50"
                       }`}
                     >

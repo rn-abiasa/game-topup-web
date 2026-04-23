@@ -32,9 +32,9 @@ export default async function AdminDashboardPage() {
   ];
 
   const statusColors: Record<string, string> = {
-    pending:    "text-yellow-500",
-    processing: "text-blue-500",
-    done:       "text-green-500",
+    pending:    "text-warning",
+    processing: "text-info",
+    done:       "text-success",
     failed:     "text-destructive",
   };
   const statusLabels: Record<string, string> = {
