@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getGames } from "@/app/actions/game";
 import { Flame } from "lucide-react";
@@ -13,11 +14,11 @@ export default async function PopularGames() {
           <Flame className="w-6 h-6 md:w-7 md:h-7" />
         </div>
         <div>
-          <h2 className="text-lg md:text-xl font-bold tracking-tight text-foreground">
+          <h2 className="text-sm md:text-xl font-bold tracking-tight text-foreground">
             Populer Saat Ini
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground mt-1">
-            Game yang paling banyak di-topup minggu ini.
+          <p className="text-xs md:text-base text-muted-foreground mt-1">
+            Game yang paling populer minggu ini.
           </p>
         </div>
       </div>
@@ -26,11 +27,15 @@ export default async function PopularGames() {
         {popularGames.map((game: any) => (
           <Link href={`/game/${game.slug}`} key={game.id}>
             <div className="flex items-center gap-4 p-4 rounded-xl border border-border/40 bg-card hover:bg-secondary/50 hover:border-primary/40 transition-all duration-200 group">
-              <img
-                src={game.image_url}
-                alt={game.name}
-                className="w-14 h-14 rounded-lg object-cover flex-shrink-0"
-              />
+              <div className="w-14 h-14 relative rounded-lg overflow-hidden flex-shrink-0">
+                <Image
+                  src={game.image_url}
+                  alt={game.name}
+                  fill
+                  className="object-cover"
+                  sizes="56px"
+                />
+              </div>
               <div className="overflow-hidden">
                 <p className="font-semibold text-sm text-foreground truncate group-hover:text-primary transition-colors">
                   {game.name}

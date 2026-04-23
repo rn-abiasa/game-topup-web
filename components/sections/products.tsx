@@ -13,10 +13,10 @@ export default async function AllProducts() {
           <LayoutGrid className="w-6 h-6 md:w-7 md:h-7" />
         </div>
         <div>
-          <h2 className="text-lg md:text-xl font-bold tracking-tight text-foreground">
+          <h2 className="text-sm md:text-xl font-bold tracking-tight text-foreground">
             Semua Produk
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground mt-1">
+          <p className="text-xs md:text-base text-muted-foreground mt-1">
             Pilih game favoritmu dan top-up sekarang.
           </p>
         </div>

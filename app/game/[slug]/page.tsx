@@ -25,9 +25,11 @@ export default async function GamePage({ params }: PageProps) {
       <main className="flex-1 min-h-screen bg-background">
         {/* Banner Section */}
         <div className="relative h-64 md:h-80 w-full">
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${game.banner_url || game.image_url})` }}
+            style={{
+              backgroundImage: `url(${game.banner_url || game.image_url})`,
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
         </div>

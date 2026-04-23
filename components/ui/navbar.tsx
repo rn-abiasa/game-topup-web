@@ -88,20 +88,23 @@ function Navbar() {
                   <SheetHeader>
                     <SheetTitle className="text-left">Menu</SheetTitle>
                   </SheetHeader>
-                  <div className="flex flex-col gap-4 mt-6">
+                  <div className="flex flex-col gap-4 p-4">
                     <Link
                       href="/"
-                      className="text-base font-medium p-2 hover:bg-secondary rounded-md"
+                      className="text-xs font-medium p-2 flex items-center gap-2 hover:bg-secondary rounded-md"
                     >
                       <span>
-                        <ShoppingCart />
+                        <ShoppingCart size={12} />
                       </span>
                       Top Up
                     </Link>
                     <Link
                       href="/lacak"
-                      className="text-base font-medium p-2 hover:bg-secondary rounded-md"
+                      className="text-xs font-medium p-2 flex items-center gap-2 hover:bg-secondary rounded-md"
                     >
+                      <span>
+                        <ScrollText size={12} />
+                      </span>
                       Lacak Pesanan
                     </Link>
                     <div className="pt-4 border-t">
