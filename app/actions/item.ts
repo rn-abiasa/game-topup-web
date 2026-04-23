@@ -50,6 +50,25 @@ export async function deleteItem(id: string) {
   revalidatePath("/admin/items");
 }
 
+export async function bulkCreateItems(game_id: string, items: { name: string, price: number }[]) {
+  const supabase = await createClient();
+  
+  const itemsToInsert = items.map(item => ({
+    game_id,
+    name: item.name,
+    price: item.price,
+  }));
+
+  const { error } = await supabase.from("items").insert(itemsToInsert);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidatePath("/admin/items");
+  return { success: true };
+}
+
 export async function getItems() {
   const supabase = await createClient();
   // We use a join to get the game name

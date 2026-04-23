@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getItems, deleteItem } from "@/app/actions/item";
 import { Button } from "@/components/ui/button";
-import { Plus, Edit, Trash2 } from "lucide-react";
+import { Plus, Edit, Trash2, Upload } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -21,12 +21,20 @@ export default async function AdminItemsPage() {
           <h1 className="text-2xl font-bold tracking-tight text-foreground">Kelola Item / Produk</h1>
           <p className="text-sm text-muted-foreground mt-1">Daftar semua item top-up untuk masing-masing game.</p>
         </div>
-        <Link href="/admin/items/create">
-          <Button>
-            <Plus className="w-4 h-4 mr-2" />
-            Tambah Item
-          </Button>
-        </Link>
+        <div className="flex gap-2">
+          <Link href="/admin/items/import">
+            <Button variant="outline">
+              <Upload className="w-4 h-4 mr-2" />
+              Import CSV
+            </Button>
+          </Link>
+          <Link href="/admin/items/create">
+            <Button>
+              <Plus className="w-4 h-4 mr-2" />
+              Tambah Item
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <div className="bg-card border border-border/40 rounded-xl overflow-hidden shadow-sm">

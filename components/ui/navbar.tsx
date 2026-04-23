@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Menu, X, Phone } from "lucide-react";
+import { Search, Menu, X, Phone, ShoppingCart, ScrollText } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -93,7 +93,10 @@ function Navbar() {
                       href="/"
                       className="text-base font-medium p-2 hover:bg-secondary rounded-md"
                     >
-                      Home
+                      <span>
+                        <ShoppingCart />
+                      </span>
+                      Top Up
                     </Link>
                     <Link
                       href="/lacak"
@@ -102,7 +105,7 @@ function Navbar() {
                       Lacak Pesanan
                     </Link>
                     <div className="pt-4 border-t">
-                       <Link href="/admin/login">
+                      <Link href="/admin/login">
                         <Button className="w-full">Login</Button>
                       </Link>
                     </div>
@@ -113,17 +116,29 @@ function Navbar() {
           </div>
 
           {/* Bottom Row: Links and Contact Info (Desktop Only) */}
-          <div className="hidden md:flex justify-between items-center py-2 border-t border-border/10 text-sm font-medium">
+          <div className="hidden md:flex justify-between items-center py-3 border-t border-border/10 text-sm font-medium">
             <div className="flex items-center gap-6">
-              <Link href="/" className="hover:text-primary transition-colors">
-                Home
+              <Link
+                href="/"
+                className="text-xs flex gap-2 items-center hover:text-primary transition-colors"
+              >
+                <span>
+                  <ShoppingCart size={12} />
+                </span>
+                Top Up
               </Link>
-              <Link href="/lacak" className="hover:text-primary transition-colors">
+              <Link
+                href="/lacak"
+                className="text-xs flex items-center gap-2 hover:text-primary transition-colors"
+              >
+                <span>
+                  <ScrollText size={12} />
+                </span>
                 Lacak Pesanan
               </Link>
             </div>
-            <div className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer">
-              <Phone className="w-4 h-4" />
+            <div className="text-xs flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+              <Phone size={12} />
               <span>WhatsApp: {waNumber}</span>
             </div>
           </div>
