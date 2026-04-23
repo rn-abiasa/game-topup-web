@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className="bg-card border-t border-border/40 mt-auto">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="flex flex-col justify-between md:flex-row">
           <div>
             <div className="mb-4">
               <img src="/logo.png" className="w-16" alt="Logo" />
@@ -15,30 +15,31 @@ function Footer() {
               Indonesia. Buka 24 Jam.
             </p>
           </div>
+          <div className="flex gap-10">
+            <div>
+              <h3 className="font-bold text-sm mb-4">Game Populer</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {games.slice(0, 4).map((game) => (
+                  <li key={game.id}>
+                    <Link
+                      href={`/game/${game.id}`}
+                      className="text-xs hover:text-primary transition-colors"
+                    >
+                      {game.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div>
-            <h3 className="font-bold text-sm mb-4">Game Populer</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              {games.slice(0, 4).map((game) => (
-                <li key={game.id}>
-                  <Link
-                    href={`/game/${game.id}`}
-                    className="text-xs hover:text-primary transition-colors"
-                  >
-                    {game.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-sm mb-4">Hubungi Kami</h3>
-            <ul className="space-y-2 text-xs text-muted-foreground">
-              <li>Email: support@topupgame.com</li>
-              <li>WhatsApp: +62 812-3456-7890</li>
-              <li>Jam Kerja: 08:00 - 22:00 WIB</li>
-            </ul>
+            <div>
+              <h3 className="font-bold text-sm mb-4">Hubungi Kami</h3>
+              <ul className="space-y-2 text-xs text-muted-foreground">
+                <li>Email: support@topupgame.com</li>
+                <li>WhatsApp: +62 812-3456-7890</li>
+                <li>Jam Kerja: 08:00 - 22:00 WIB</li>
+              </ul>
+            </div>
           </div>
         </div>
 

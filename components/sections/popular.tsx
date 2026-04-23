@@ -10,11 +10,11 @@ export default async function PopularGames() {
   return (
     <section className="py-5 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex items-center gap-3 mb-8 md:mb-12">
-        <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-warning/20 flex items-center justify-center text-warning">
+        <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-warning/20 flex items-center justify-center text-warning">
           <Flame className="w-6 h-6 md:w-7 md:h-7" />
         </div>
         <div>
-          <h2 className="text-sm md:text-xl font-bold tracking-tight text-foreground">
+          <h2 className="text-sm font-bold tracking-tight text-foreground">
             Populer Saat Ini
           </h2>
           <p className="text-xs md:text-base text-muted-foreground mt-1">
@@ -27,7 +27,7 @@ export default async function PopularGames() {
         {popularGames.map((game: any) => (
           <Link href={`/game/${game.slug}`} key={game.id}>
             <div className="flex items-center gap-4 p-4 rounded-xl border border-border/40 bg-card hover:bg-secondary/50 hover:border-primary/40 transition-all duration-200 group">
-              <div className="w-14 h-14 relative rounded-lg overflow-hidden flex-shrink-0">
+              <div className="w-14 h-14 relative rounded-lg overflow-hidden shrink-0">
                 <Image
                   src={game.image_url}
                   alt={game.name}
